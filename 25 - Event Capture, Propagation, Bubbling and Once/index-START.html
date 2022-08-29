@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Understanding JavaScript's Capture</title>
+  <!-- Tutorial video: https://www.youtube.com/watch?v=F1anRyL37lE -->
 </head>
 <body class="bod">
 
@@ -42,7 +43,18 @@
 
 <button></button>
 <script>
+  const divs = document.querySelectorAll('div');
 
+  function logText(e) {
+    console.log(this.classList.value);
+    //e.stopPropagation();  // stop bubbling
+    //console.log(this);
+  }
+
+  divs.forEach(div => div.addEventListener('click', logText, {
+    capture: false,
+    once: true // Will listen for a 'click', then unbind itself. Same as a .removeEventListener
+  }));
 </script>
 </body>
 </html>
